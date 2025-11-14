@@ -1,19 +1,738 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Markdown from '../components/Markdown.astro';
+// Page statique pour la tombola solidaire - Les Amis d'Eugénie
+// Génère un HTML autonome avec CSS intégré
+import { translations } from '../utils/translations.js';
 
-const explainer = `
-An Astro website can go way beyond static pages - on the right platform.
-
-Netlify supports not only [Streaming SSR](https://docs.astro.build/en/guides/server-side-rendering/#html-streaming) and fast [Edge Middleware](https://docs.astro.build/en/guides/middleware/), but also [on-demand revalidation](https://www.netlify.com/blog/cache-tags-and-purge-api-on-netlify/) and [stale-while-revalidate](https://www.netlify.com/blog/swr-and-fine-grained-cache-control/). 
-Any page or data can be rebuilt only when needed, without site visitors ever getting a performance hit.
-`;
+const currentYear = new Date().getFullYear();
 ---
 
-<Layout title="Welcome to Astro.">
-    <h1 class="mb-10">Netlify Platform Starter for Astro</h1>
-    <Markdown content={explainer} class="mb-10 text-lg" />
-    <p>
-        <a href="https://docs.netlify.com/frameworks/astro/" class="btn btn-lg sm:min-w-64">Read the Docs</a>
-    </p>
-</Layout>
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tombola Solidaire – Les Amis d'Eugénie</title>
+    <meta name="description" content="Soutenez Eugénie et sa famille en participant à une tombola caritative" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family:
+                'Poppins',
+                -apple-system,
+                BlinkMacSystemFont,
+                'Segoe UI',
+                Roboto,
+                'Helvetica Neue',
+                Arial,
+                sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(to bottom, #f5f5f0, #ffffff);
+            min-height: 100vh;
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            position: relative;
+        }
+
+        /* Bouton de switch de langue */
+        .language-switcher {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 100;
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .language-switcher button {
+            background: transparent;
+            border: 2px solid #5b9bd5;
+            color: #5b9bd5;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+
+        .language-switcher button:hover {
+            background: #5b9bd5;
+            color: #ffffff;
+        }
+
+        .language-switcher button.active {
+            background: #5b9bd5;
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .language-switcher {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.4rem;
+            }
+
+            .language-switcher button {
+                padding: 0.4rem 0.75rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Titre principal */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        /* Sous-titre */
+        .subtitle {
+            font-size: 1.25rem;
+            color: #5a6c7d;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        /* Sections */
+        section {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #e8e8e0;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Image au-dessus du titre */
+        .section-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin: 0 auto 2rem auto;
+            display: block;
+        }
+
+        /* Galerie d'images */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        /* Galerie 3x3 */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .gallery-grid-item {
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            aspect-ratio: 1;
+        }
+
+        .gallery-grid-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-grid-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-gallery-item {
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .image-gallery-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .image-gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .image-gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-gallery-caption {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: #6a6a6a;
+            font-style: italic;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #ffffff;
+            font-size: 2.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            z-index: 1001;
+            line-height: 1;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+        }
+
+        .lightbox-close:hover {
+            opacity: 0.7;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Bouton d'action */
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #5b9bd5 0%, #4a8bc2 100%);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(91, 155, 213, 0.3);
+            margin: 1.5rem 0;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(135deg, #4a8bc2 0%, #3d7ba8 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(91, 155, 213, 0.4);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        /* Bouton d'ancrage */
+        .anchor-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #5b9bd5 0%, #4a8bc2 100%);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(91, 155, 213, 0.3);
+            margin: 1.5rem auto 3rem auto;
+            cursor: pointer;
+        }
+
+        .anchor-button:hover {
+            background: linear-gradient(135deg, #4a8bc2 0%, #3d7ba8 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(91, 155, 213, 0.4);
+        }
+
+        .anchor-button:active {
+            transform: translateY(0);
+        }
+
+        .anchor-button-container {
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            color: #6a6a6a;
+            font-size: 0.9rem;
+            border-top: 1px solid #e8e8e0;
+            margin-top: 3rem;
+        }
+
+        footer a {
+            color: #5b9bd5;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 1.5rem 1rem;
+            }
+
+            .cta-button {
+                padding: 0.875rem 2rem;
+                font-size: 1rem;
+                display: block;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-image {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            section {
+                padding: 1.25rem;
+            }
+
+            .image-gallery {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+
+            .anchor-button {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Bouton de switch de langue -->
+    <div class="language-switcher">
+        <button id="lang-fr" class="active" onclick="switchLanguage('fr')">FR</button>
+        <button id="lang-es" onclick="switchLanguage('es')">ES</button>
+    </div>
+
+    <div class="container">
+        <!-- Titre principal -->
+        <h1 data-i18n="title">Participez à la tombola solidaire des Amis d'Eugénie !</h1>
+        <p class="subtitle" data-i18n="subtitle">Ensemble, aidons Eugénie à poursuivre ses soins médicaux.</p>
+        <div class="anchor-button-container">
+            <a href="#comment-participer" class="anchor-button" data-i18n="participateButton">Je participe</a>
+        </div>
+
+        <!-- Section À propos d'Eugénie -->
+        <section>
+            <img src="/images/eugenie-3.jpeg" alt="Eugénie" class="section-image" loading="lazy" />
+            <h2 data-i18n="aboutTitle">À propos d'Eugénie</h2>
+            <p data-i18n="aboutText1">
+                Eugénie Arazo est une jeune femme lumineuse qui part vivre au Mexique en 2016 pour y exercer le métier
+                de professeur des écoles à Mexico. En
+                2019, elle se marie avec Damian, le couple donne naissance à leur première petite fille, Elénalice le 17
+                février 2022. Le 15 octobre 2024
+                Eugénie a été victime du HELLP syndrome, conséquence d'une complication grave d'une prééclampsie lors de
+                sa deuxième grossesse. Son
+                accouchement prématuré par césarienne provoque un Accident Vasculaire Cérébral entraînant une immobilité
+                totale ainsi que diverses séquelles
+                très importantes. Elle se bat aujourd'hui pour retrouver ses facultés mais les frais associés à son
+                hospitalisation à domicile, non pris en
+                charge par le système de santé mexicain, sont énormes. Elle nécessite des soins infirmiers 24h/24, des
+                séances de kinésithérapie
+                quotidiennes et des soins spécifiques récurrents. Aujourd'hui sans ressources, la survie de la famille
+                et l'accompagnement médical d'Eugénie
+                dépendent entièrement du soutien des proches.
+            </p>
+        </section>
+
+        <!-- Section Le lot à gagner -->
+        <section>
+            <h2 data-i18n="prizeTitle">Le lot à gagner</h2>
+            <div class="image-gallery">
+                <div>
+                    <div class="image-gallery-item" data-image="/images/oeuvre-1.jpg">
+                        <img src="/images/oeuvre-1.jpg" alt="Œuvre de Norton Maza - Vue 1" loading="lazy" />
+                    </div>
+                </div>
+                <div>
+                    <div class="image-gallery-item" data-image="/images/oeuvre-2.png">
+                        <img src="/images/oeuvre-2.png" alt="Œuvre de Norton Maza - Vue 2" loading="lazy" />
+                    </div>
+                    <p class="image-gallery-caption">Grand Format</p>
+                </div>
+            </div>
+            <p data-i18n="prizeDescription" data-i18n-html>
+                Grâce à la générosité de l'artiste <a href="https://www.nortonmaza.com/" target="_blank"
+                    rel="noopener noreferrer">Norton Maza</a>, vous
+                pouvez remporter une œuvre originale.<br />
+                Norton Maza, artiste reconnu, représentera le Chili à la prochaine Biennale de Venise en mai 2026.<br />
+                Chaque ticket acheté rapproche Eugénie de ses soins.
+            </p>
+            <p data-i18n="prizeDetails" data-i18n-html>
+                <strong>Titre de l'oeuvre : El Hombre en su Átomo</strong><br />
+                faisant partie de la série <em>Estudio para la sinfonia del poder eterno</em><br />
+                Édition limitée - 75 exemplaires par œuvre<br />
+                Dimensions (petit format) : 30 x 30 cm / Edition 6 de 75<br />
+                Photographie analogique d'un diorama en impression Digigraphie Epson sur papier coton 310 g.<br />
+                L'œuvre est numérotée, signée et accompagnée d'un certificat d'authenticité.<br />
+                Fournie sans cadre<br />
+                Valeur estimée 1200€<br />
+            </p>
+        </section>
+
+        <!-- Section Comment participer -->
+        <section id="comment-participer">
+            <h2 data-i18n="howToParticipateTitle">Comment participer ?</h2>
+            <p>
+                <span data-i18n="howToParticipateText1">La participation se fait directement via HelloAsso.</span>
+                <br />
+                <span data-i18n="howToParticipateText2">Chaque billet acheté contribue entièrement au financement des
+                    soins d'Eugénie.</span><br />
+                <span data-i18n="howToParticipateText3">Cliquez sur le bouton ci-dessous pour accéder à la page de la
+                    tombola.</span>
+            </p>
+            <p>
+                Ticket unique : 20,00 €<br />
+                Carnet de 5 tickets : 90,00 €<br />
+                Carnet de 10 tickets : 150,00 €<br />
+            </p>
+            <div class="button-container">
+                <a href="https://www.helloasso.com/associations/les-amis-d-eugenie/evenements/gagnez-une-oeuvre-de-norton-maza-representant-du-chili-a-la-biennale-de-venise"
+                    class="cta-button" target="_blank" rel="noopener noreferrer" data-i18n="participateCTA">
+                    Participer à la tombola
+                </a>
+            </div>
+        </section>
+
+        <!-- Section Galerie -->
+        <section>
+            <h2 data-i18n="galleryTitle">Galerie</h2>
+            <div class="gallery-grid">
+                <div class="gallery-grid-item" data-image="/images/gallery/1.jpeg">
+                    <img src="/images/gallery/1.jpeg" alt="Galerie - Image 1" loading="lazy" />
+                </div>
+                <div class="gallery-grid-item" data-image="/images/gallery/2.jpeg">
+                    <img src="/images/gallery/2.jpeg" alt="Galerie - Image 2" loading="lazy" />
+                </div>
+                <div class="gallery-grid-item" data-image="/images/gallery/3.jpeg">
+                    <img src="/images/gallery/3.jpeg" alt="Galerie - Image 3" loading="lazy" />
+                </div>
+                <div class="gallery-grid-item" data-image="/images/gallery/4.png">
+                    <img src="/images/gallery/4.png" alt="Galerie - Image 4" loading="lazy" />
+                </div>
+                <div class="gallery-grid-item" data-image="/images/gallery/5.png">
+                    <img src="/images/gallery/5.png" alt="Galerie - Image 5" loading="lazy" />
+                </div>
+                <div class="gallery-grid-item" data-image="/images/gallery/6.png">
+                    <img src="/images/gallery/6.png" alt="Galerie - Image 6" loading="lazy" />
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Association Les Amis d'Eugénie -->
+        <section>
+            <h2 data-i18n="associationTitle">Association Les Amis d'Eugénie</h2>
+            <p data-i18n="associationText">
+                L'association a pour mission de soutenir Eugénie et sa famille, moralement, matériellement et
+                financièrement, en organisant des actions
+                solidaires, levées de fonds et événements caritatifs.
+            </p>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            <a href="mailto:contact@example.com" data-i18n="contact">Contact</a>
+        </p>
+        <p data-i18n="associationLaw">Association loi 1901</p>
+        <p>&copy; {currentYear} <span data-i18n="copyright">Les Amis d'Eugénie</span></p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Œuvre de Norton Maza" />
+        </div>
+    </div>
+
+    <script set:html={`const translations=${JSON.stringify(translations, null, 2)};`} />
+    <script is:inline>
+        (function () {
+            // Fonction pour ouvrir la lightbox
+            function openLightbox(imageSrc) {
+                const lightbox = document.getElementById('lightbox');
+                const lightboxImg = document.getElementById('lightbox-img');
+                if (lightbox && lightboxImg) {
+                    lightboxImg.src = imageSrc;
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            // Fonction pour fermer la lightbox
+            function closeLightbox() {
+                const lightbox = document.getElementById('lightbox');
+                if (lightbox) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            // Attendre que le DOM soit chargé
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+
+            function init() {
+                // Event listeners pour les images de la galerie (lot à gagner)
+                const galleryItems = document.querySelectorAll('.image-gallery-item');
+                galleryItems.forEach(function (item) {
+                    item.addEventListener('click', function () {
+                        const imageSrc = this.getAttribute('data-image');
+                        if (imageSrc) {
+                            openLightbox(imageSrc);
+                        }
+                    });
+                });
+
+                // Event listeners pour les images de la grille galerie
+                const gridItems = document.querySelectorAll('.gallery-grid-item');
+                gridItems.forEach(function (item) {
+                    item.addEventListener('click', function () {
+                        const imageSrc = this.getAttribute('data-image');
+                        if (imageSrc) {
+                            openLightbox(imageSrc);
+                        }
+                    });
+                });
+
+                // Event listener pour le bouton de fermeture
+                const closeButton = document.querySelector('.lightbox-close');
+                if (closeButton) {
+                    closeButton.addEventListener('click', closeLightbox);
+                }
+
+                // Event listener pour fermer en cliquant sur le fond
+                const lightbox = document.getElementById('lightbox');
+                if (lightbox) {
+                    lightbox.addEventListener('click', function (event) {
+                        // Ne fermer que si on clique directement sur le fond (pas sur l'image)
+                        if (event.target === lightbox) {
+                            closeLightbox();
+                        }
+                    });
+                }
+
+                // Fermer avec la touche Échap
+                document.addEventListener('keydown', function (event) {
+                    if (event.key === 'Escape') {
+                        const lightbox = document.getElementById('lightbox');
+                        if (lightbox && lightbox.classList.contains('active')) {
+                            closeLightbox();
+                        }
+                    }
+                });
+            }
+        })();
+
+        // Système de traduction
+        let currentLang = localStorage.getItem('language') || 'fr';
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('language', lang);
+            updateLanguage();
+            updateLanguageButtons();
+        }
+
+        function updateLanguage() {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(function (element) {
+                const key = element.getAttribute('data-i18n');
+                if (translations && translations[currentLang] && translations[currentLang][key]) {
+                    if (element.hasAttribute('data-i18n-html')) {
+                        element.innerHTML = translations[currentLang][key];
+                    } else {
+                        element.textContent = translations[currentLang][key];
+                    }
+                }
+            });
+            document.documentElement.lang = currentLang;
+        }
+
+        function updateLanguageButtons() {
+            document.getElementById('lang-fr').classList.toggle('active', currentLang === 'fr');
+            document.getElementById('lang-es').classList.toggle('active', currentLang === 'es');
+        }
+
+        // Rendre switchLanguage accessible globalement
+        window.switchLanguage = switchLanguage;
+
+        // Initialiser la langue au chargement
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function () {
+                updateLanguage();
+                updateLanguageButtons();
+            });
+        } else {
+            updateLanguage();
+            updateLanguageButtons();
+        }
+    </script>
+</body>
+
+</html>
