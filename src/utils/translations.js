@@ -15,8 +15,8 @@ export const translations = {
         
         // Section Le lot à gagner
         prizeTitle: "Le lot à gagner",
-        prizeDescription: "Grâce à la générosité de l'artiste <a href=\"https://www.nortonmaza.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Norton Maza</a>, vous pouvez remporter une œuvre originale.<br />Norton Maza, artiste reconnu, représentera le Chili à la prochaine Biennale de Venise en mai 2026.<br />Chaque ticket acheté rapproche Eugénie de ses soins.",
-        prizeDetails: "Titre de l'oeuvre : El Hombre en su Átomo<br />faisant partie de la série <em>Estudio para la sinfonia del poder eterno</em><br />Édition limitée - 75 exemplaires par œuvre<br />Dimensions (petit format) : 30 x 30 cm / Edition 6 de 75<br />Photographie analogique d'un diorama en impression Digigraphie Epson sur papier coton 310 g.<br />L'œuvre est numérotée, signée et accompagnée d'un certificat d'authenticité.<br />Fournie sans cadre<br />Valeur estimée 1200€",
+        prizeDescription: "Grâce à la générosité de l'artiste <a href=\"https://www.nortonmaza.com/\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Norton Maza</strong></a>, vous pouvez remporter une œuvre originale.<br />Norton Maza, artiste reconnu, représentera le Chili à la prochaine Biennale de Venise en mai 2026.<br />Chaque ticket acheté rapproche Eugénie de ses soins.",
+        prizeDetails: "<strong>Titre de l'oeuvre : El Hombre en su Átomo</strong><br />faisant partie de la série <em>Estudio para la sinfonia del poder eterno</em><br />Édition limitée - 75 exemplaires par œuvre<br />Dimensions (petit format) : 30 x 30 cm / Edition 6 de 75<br />Photographie analogique d'un diorama en impression Digigraphie Epson sur papier coton 310 g.<br />L'œuvre est numérotée, signée et accompagnée d'un certificat d'authenticité.<br />Fournie sans cadre<br />Valeur estimée 1200€",
         
         // Section Galerie
         galleryTitle: "Galerie",
@@ -27,6 +27,7 @@ export const translations = {
         howToParticipateText2: "Chaque billet acheté contribue entièrement au financement des soins d'Eugénie.",
         howToParticipateText3: "Cliquez sur le bouton ci-dessous pour accéder à la page de la tombola.",
         participateCTA: "Participer à la tombola",
+        drawDate: "Tirage le 03 janvier 2026",
         
         // Section Association
         associationTitle: "Association Les Amis d'Eugénie",
@@ -50,8 +51,8 @@ export const translations = {
         
         // Section Le lot à gagner
         prizeTitle: "El premio a ganar",
-        prizeDescription: "Gracias a la generosidad del artista <a href=\"https://www.nortonmaza.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Norton Maza</a>, puedes ganar una obra original.<br />Norton Maza, artista reconocido, representará a Chile en la próxima Bienal de Venecia en mayo de 2026.<br />Cada boleto comprado acerca a Eugénie a sus cuidados.",
-        prizeDetails: "Título de la obra: El Hombre en su Átomo<br />parte de la serie <em>Estudio para la sinfonia del poder eterno</em><br />Edición limitada - 75 ejemplares por obra<br />Dimensiones (formato pequeño): 30 x 30 cm / Edición 6 de 75<br />Fotografía analógica de un diorama en impresión Digigraphie Epson sobre papel algodón 310 g.<br />La obra está numerada, firmada y acompañada de un certificado de autenticidad.<br />Suministrada sin marco<br />Valor estimado 1200€",
+        prizeDescription: "Gracias a la generosidad del artista <a href=\"https://www.nortonmaza.com/\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Norton Maza</strong></a>, puedes ganar una obra original.<br />Norton Maza, artista reconocido, representará a Chile en la próxima Bienal de Venecia en mayo de 2026.<br />Cada boleto comprado acerca a Eugénie a sus cuidados.",
+        prizeDetails: "<strong>Título de la obra: El Hombre en su Átomo</strong><br />parte de la serie <em>Estudio para la sinfonia del poder eterno</em><br />Edición limitada - 75 ejemplares por obra<br />Dimensiones (formato pequeño): 30 x 30 cm / Edición 6 de 75<br />Fotografía analógica de un diorama en impresión Digigraphie Epson sobre papel algodón 310 g.<br />La obra está numerada, firmada y acompañada de un certificado de autenticidad.<br />Suministrada sin marco<br />Valor estimado 1200€",
         
         // Section Galerie
         galleryTitle: "Galería",
@@ -62,6 +63,7 @@ export const translations = {
         howToParticipateText2: "Cada boleto comprado contribuye íntegramente a la financiación de los cuidados de Eugénie.",
         howToParticipateText3: "Haz clic en el botón de abajo para acceder a la página de la tómbola.",
         participateCTA: "Participar en la tómbola",
+        drawDate: "Sorteo el 03 de enero de 2026",
         
         // Section Association
         associationTitle: "Asociación Los Amigos de Eugénie",
