@@ -15,7 +15,7 @@ export const translations = {
         
         // Section Le lot à gagner
         prizeTitle: "Le lot à gagner",
-        prizeDescription: "Grâce à la générosité de l'artiste <a href=\"https://www.nortonmaza.com/\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Norton Maza</strong></a>, vous pouvez remporter une œuvre originale.<br />Norton Maza, artiste reconnu, représentera le Chili à la prochaine Biennale de Venise en mai 2026.<br />Chaque ticket acheté rapproche Eugénie de ses soins.",
+        prizeDescription: "Grâce à la générosité de l'artiste <a href=\"https://www.nortonmaza.com/\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #000;\"><strong>Norton Maza</strong></a>, vous pouvez remporter une œuvre originale.<br /><strong>Norton Maza, artiste reconnu, représentera le Chili à la prochaine Biennale de Venise en mai 2026.</strong><br />Chaque ticket acheté rapproche Eugénie de ses soins.",
         prizeDetails: "<strong>Titre de l'oeuvre : El Hombre en su Átomo</strong><br />faisant partie de la série <em>Estudio para la sinfonia del poder eterno</em><br />Édition limitée - 75 exemplaires par œuvre<br />Dimensions (petit format) : 30 x 30 cm / Edition 6 de 75<br />Photographie analogique d'un diorama en impression Digigraphie Epson sur papier coton 310 g.<br />L'œuvre est numérotée, signée et accompagnée d'un certificat d'authenticité.<br />Fournie sans cadre<br />Valeur estimée 1200€",
         
         // Section Galerie
@@ -51,7 +51,7 @@ export const translations = {
         
         // Section Le lot à gagner
         prizeTitle: "El premio a ganar",
-        prizeDescription: "Gracias a la generosidad del artista <a href=\"https://www.nortonmaza.com/\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Norton Maza</strong></a>, puedes ganar una obra original.<br />Norton Maza, artista reconocido, representará a Chile en la próxima Bienal de Venecia en mayo de 2026.<br />Cada boleto comprado acerca a Eugénie a sus cuidados.",
+        prizeDescription: "Gracias a la generosidad del artista <a href=\"https://www.nortonmaza.com/\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Norton Maza</strong></a>, puedes ganar una obra original.<br /><strong>Norton Maza, artista reconocido, representará a Chile en la próxima Bienal de Venecia en mayo de 2026.</strong><br />Cada boleto comprado acerca a Eugénie a sus cuidados.",
         prizeDetails: "<strong>Título de la obra: El Hombre en su Átomo</strong><br />parte de la serie <em>Estudio para la sinfonia del poder eterno</em><br />Edición limitada - 75 ejemplares por obra<br />Dimensiones (formato pequeño): 30 x 30 cm / Edición 6 de 75<br />Fotografía analógica de un diorama en impresión Digigraphie Epson sobre papel algodón 310 g.<br />La obra está numerada, firmada y acompañada de un certificado de autenticidad.<br />Suministrada sin marco<br />Valor estimado 1200€",
         
         // Section Galerie
